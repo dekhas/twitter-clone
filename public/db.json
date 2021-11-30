@@ -1,0 +1,54 @@
+{
+  "tweet": [
+    {
+      "id": 1,
+      "_id": "5f625ff6bd97609c6925e2b4",
+      "text": "In ad dolor labore ea est laboris commodo elit consequat nulla exercitation cupidatat. Ex nostrud nulla qui nisi cupidatat fugiat duis. Officia occaecat fugiat voluptate sit. Sint est exercitation laboris proident aute consectetur eu aliqua minim sint sint ea aute velit. Ullamco dolore qui mollit non sint sunt consequat quis.",
+      "user": {
+        "fullname": "Dickerson Mcleod",
+        "username": "kirk",
+        "avatarUrl": "https://source.unsplash.com/random/100x100?3"
+      }
+    },
+    {
+      "text": "Test",
+      "_id": "5oeb0p9vfon",
+      "user": {
+        "fullname": "Test",
+        "username": "test",
+        "avatarUrl": "https://bit.ly/3DWYupU"
+      },
+      "id": 2
+    },
+    {
+      "text": "Это и вправду работает)",
+      "_id": "g4u2h6dnzcl",
+      "user": {
+        "fullname": "Test",
+        "username": "test",
+        "avatarUrl": "https://bit.ly/3DWYupU"
+      },
+      "id": 3
+    },
+    {
+      "text": "Проверка",
+      "_id": "e4d23908ljo",
+      "user": {
+        "fullname": "User",
+        "username": "user",
+        "avatarUrl": "https://bit.ly/3DWYupU"
+      },
+      "id": 4
+    },
+    {
+      "text": "o\n0",
+      "_id": "tyshhd98mb",
+      "user": {
+        "fullname": "User",
+        "username": "user",
+        "avatarUrl": "https://bit.ly/3DWYupU"
+      },
+      "id": 5
+    }
+  ]
+}
