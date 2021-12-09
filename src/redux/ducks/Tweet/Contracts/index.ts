@@ -14,6 +14,7 @@ export interface Tweet {
     },
     text: string,
     media?: string,
+    createdAt: string,
 }
 
 export interface TweetState {

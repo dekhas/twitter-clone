@@ -5,10 +5,8 @@ import {makeStyles} from "@mui/styles";
 import TwitterIcon from '@mui/icons-material/Twitter';
 import SearchIcon from '@mui/icons-material/Search';
 import PeopleIcon from '@mui/icons-material/People';
-import TextField from "@mui/material/TextField";
-import ModalDialog from "../Components/ModalDialog";
-import DialogActions from "@mui/material/DialogActions";
-import {NavLink} from "react-router-dom";
+import LoginModal from "./components/LoginModal"
+import RegisterModal from "./components/RegisterModal";
 
 const useStyles = makeStyles(() => ({
     wrapper: {
@@ -114,81 +112,13 @@ const SignIn: React.FC = (): React.ReactElement => {
                         <Button color={"primary"} variant={"contained"} onClick={handleClickOpenSignUp} fullWidth>
                             Зарегистрироваться
                         </Button>
-                        <ModalDialog closeVisible={handleClickClose} title={"Регистрация"} visible={visibleModal === "SignUp"}>
-                            <TextField
-                                fullWidth
-                                id={"login"}
-                                label={"Никнейм"}
-                                type={"login"}
-                                variant={"filled"}
-                            />
-                            <br/>
-                            <br/>
-                            <TextField
-                                fullWidth
-                                id={"E-Mail"}
-                                label={"Почта"}
-                                type={"E-Mail"}
-                                variant={"filled"}
-                            />
-                            <br/>
-                            <br/>
-                            <TextField
-                                fullWidth
-                                id={"password"}
-                                label={"Пароль"}
-                                type={"password"}
-                                variant={"filled"}
-                            />
-                            <br/>
-                            <br/>
-                            <TextField
-                                fullWidth
-                                id={"confirm-password"}
-                                label={"Подтвердите пароль"}
-                                type={"confirm-password"}
-                                variant={"filled"}
-                            />
-                            <DialogActions>
-                                <Button onClick={handleClickClose} variant={"contained"} fullWidth>
-                                    <NavLink to={"/home"} style={{textDecoration: "none", color: "white"}}>Зарегистроваться</NavLink>
-                                </Button>
-                                <Button onClick={handleClickClose} variant={"contained"} fullWidth>
-                                    Выход
-                                </Button>
-                            </DialogActions>
-                        </ModalDialog>
+                        <RegisterModal open={visibleModal === "SignUp"} handleClose={handleClickClose}/>
                     </div>
                     <div className={classes.loginSideButton}>
                         <Button color={"primary"} variant={"outlined"} fullWidth onClick={handleClickOpenSignIn}>
                             Войти
                         </Button>
-                        <ModalDialog closeVisible={handleClickClose} title={"Войти"} visible={visibleModal === "SignIn"}>
-                            <TextField
-                                fullWidth
-                                id={"E-Mail"}
-                                label={"Почта"}
-                                type={"E-Mail"}
-                                variant={"filled"}
-                            />
-                            <br/>
-                            <br/>
-                            <TextField
-                                fullWidth
-                                id={"password"}
-                                label={"Пароль"}
-                                type={"password"}
-                                variant={"filled"}
-                            />
-                            <DialogActions>
-                                <Button onClick={handleClickClose} variant={"contained"} fullWidth>
-                                    <NavLink to={"/home"} style={{textDecoration: "none", color: "white"}}>Войти</NavLink>
-                                </Button>
-                                <Button onClick={handleClickClose} variant={"contained"} fullWidth>
-                                    Выход
-                                </Button>
-                            </DialogActions>
-                        </ModalDialog>
+                        <LoginModal open={visibleModal === "SignIn"} handleClose={handleClickClose}/>
                     </div>
                 </div>
             </section>

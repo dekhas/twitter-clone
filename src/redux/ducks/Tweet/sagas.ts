@@ -21,7 +21,6 @@ export function* fetchTweetsRequest() {
 
 export function* addTweetRequest({payload: text}: FetchTweetActionInterface) {
     try {
-        console.log(text);
         const tweet: Tweet = yield call(TweetsAPI.addTweet, text);
         yield put(addTweet(tweet));
     } catch (e) {

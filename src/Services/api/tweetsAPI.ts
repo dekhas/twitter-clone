@@ -1,11 +1,6 @@
 import {axios} from "../../core/axios";
 import {TweetState, Tweet} from "../../redux/ducks/Tweet/Contracts";
-
-interface Response<T> {
-    status: string,
-    data?: T,
-    message?: string,
-}
+import Response from "../../types/ResponseType";
 
 export const TweetsAPI = {
     fetchTweets() {

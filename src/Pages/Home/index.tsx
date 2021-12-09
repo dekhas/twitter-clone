@@ -131,9 +131,6 @@ const Home: React.FC = (): React.ReactElement => {
                                     <Tweet {...item}/>
                                 </Link>
                             )) : <div style={{margin: 200}}><Loader/></div>}
-                            <Tweet _id={"9bwq1apw5c"}
-                                   user={{fullname: "User", username:"user", avatarUrl: "https://bit.ly/3DWYupU"}}
-                                   text={"Жили у бабуси два веселых гуся. Один серый, другой белый. Два веселых гуся)"}/>
                         </Route>
                     </Paper>
                 </Grid>
@@ -144,5 +141,5 @@ const Home: React.FC = (): React.ReactElement => {
         </Container>
     )
 };
-
+// <Tweet _id={"9bwq1apw5c"} user={{fullname: "User", username:"user", avatarUrl: "https://bit.ly/3DWYupU"}} text={"Жили у бабуси два веселых гуся. Один серый, другой белый. Два веселых гуся)"}/>
 export default Home;
