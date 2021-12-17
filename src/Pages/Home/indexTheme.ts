@@ -15,9 +15,14 @@ const useHomeStyles = makeStyles((theme: any) => ({
         display: "flex",
         marginBottom: 5,
         marginTop: 5,
+        "& a": {
+            color: 'black',
+            textDecoration: 'none',
+        },
         "&:hover": {
             "& div": {
                 backgroundColor: "rgba(29,161,242,0.1)",
+                cursor: 'pointer',
                 "& h6": {
                     color: theme.palette.primary.main,
                 },

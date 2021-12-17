@@ -1,16 +1,20 @@
 import {call, put, takeLatest} from "redux-saga/effects";
-import {fetchUserDataInterface, setUser, setUserLoadingState, UserActionTypes} from "./actionCreators";
-import {UserState} from "./Contracts";
+import {
+    loginUserDataInterface,
+    registerUserDataInterface,
+    setUser,
+    setUserLoadingState,
+    UserActionTypes
+} from "./actionCreators";
+import {UserInterface, UserState} from "./Contracts";
 import {AuthAPI} from "../../../Services/api/authAPI";
 import {LoadingState} from "../../../types/loadingState";
+import setToken from "../../../utils/setToken";
 
-export function* fetchUserRequest({payload: loginData}: fetchUserDataInterface) {
+export function* loginUserRequest({payload: loginData}: loginUserDataInterface) {
     try {
-        yield put(setUserLoadingState(LoadingState.LOADING));
         const data:UserState['data'] = yield call(AuthAPI.login, loginData);
-        if (data?.token != null) {
-            window.localStorage.setItem('token', data.token);
-        }
+        setToken(data?.token);
         yield put(setUser(data));
         yield put(setUserLoadingState(LoadingState.LOADED));
         yield put(setUserLoadingState(LoadingState.NEVER))
@@ -20,6 +24,27 @@ export function* fetchUserRequest({payload: loginData}: fetchUserDataInterface) 
     }
 }
 
+export function* registerUserRequest({payload: registerData}: registerUserDataInterface) {
+    try {
+        const data:UserState["data"] = yield call(AuthAPI.register, registerData);
+        setToken(data?.token);
+        yield put(setUser(data));
+        yield put(setUserLoadingState(LoadingState.LOADED));
+        yield put(setUserLoadingState(LoadingState.NEVER))
+    } catch (e) {
+        yield put(setUserLoadingState(LoadingState.ERROR))
+    }
+}
+
+export function* authMeRequest() {
+    try {
+        const data:UserInterface = yield call(AuthAPI.authMe);
+        yield put(setUser(data))
+    } catch (e) {}
+}
+
 export function* userSaga() {
-    yield takeLatest(UserActionTypes.FETCH_USER, fetchUserRequest)
+    yield takeLatest(UserActionTypes.LOGIN_USER, loginUserRequest);
+    yield takeLatest(UserActionTypes.AUTH_ME, authMeRequest);
+    yield takeLatest(UserActionTypes.REGISTER_USER, registerUserRequest)
 }

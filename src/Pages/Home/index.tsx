@@ -15,11 +15,13 @@ import useHomeStyles from "./indexTheme";
 import ModalDialog from "../../Components/ModalDialog";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchTweets} from "../../redux/ducks/Tweet/actionCreators";
-import {selectLoadingState, selectTweets} from "../../redux/selectors"
+import {selectLoadingState, selectTweets, selectUserData} from "../../redux/selectors"
 import {LoadingState} from "../../redux/ducks/Tweet/Contracts";
 import TweetPage from "./component/tweetPage"
-import BackButton from "../../Components/BackButton";
 import Loader from "../../Components/Loader";
+import {authMe} from "../../redux/ducks/User/actionCreators";
+import AppTitle from "./component/appTitle";
+import UserPage from "../User";
 
 const Home: React.FC = (): React.ReactElement => {
     document.title = "Home";
@@ -29,6 +31,11 @@ const Home: React.FC = (): React.ReactElement => {
         dispatch(fetchTweets())
         // eslint-disable-next-line
     }, [dispatch, fetchTweets]);
+
+    useEffect(() => {
+        dispatch(authMe())
+        // eslint-disable-next-line
+    }, []);
 
     const[isAddTweetOpen, setIsAddTweetOpen] = useState<boolean>(false);
 
@@ -41,6 +48,7 @@ const Home: React.FC = (): React.ReactElement => {
 
     const tweets = useSelector(selectTweets);
     const isLoading = useSelector(selectLoadingState);
+    const user = useSelector(selectUserData);
 
     console.log(tweets);
 
@@ -51,7 +59,7 @@ const Home: React.FC = (): React.ReactElement => {
                     <ul className={classes.sideMenu}>
                         <li className={classes.sideMenuItem}>
                             <IconButton>
-                                <NavLink to={"/"}>
+                                <NavLink to={"/home"}>
                                     <TwitterIcon fontSize={"large"} color={"primary"}/>
                                 </NavLink>
                             </IconButton>
@@ -90,7 +98,9 @@ const Home: React.FC = (): React.ReactElement => {
                         <li className={classes.sideMenuItem}>
                             <div>
                                 <PersonOutlineIcon fontSize={"large"}/>
-                                <Typography variant={"h6"} sx={{display: {"xs": "none", "md": "block"}}}>Профиль</Typography>
+                                <NavLink to={`/user/${user?.username}`}>
+                                    <Typography variant={"h6"} sx={{display: {"xs": "none", "md": "block"}}}>Профиль</Typography>
+                                </NavLink>
                             </div>
                         </li>
                         <li>
@@ -106,17 +116,10 @@ const Home: React.FC = (): React.ReactElement => {
                 <Grid item xs={6}>
                     <Paper style={{height: "100%", borderBottom: 0, borderTop: 0,}} variant={"outlined"}>
                         <Route exact path={"/home"}>
-                            <Paper style={{borderTop: 0, borderLeft: 0, borderRight: 0, padding: 10,}} variant={'outlined'}>
-                                <Typography style={{fontWeight: 780}} variant={"h6"}>Главная</Typography>
-                            </Paper>
+                            <AppTitle text={"Главная"} withBackButton={false}/>
                         </Route>
-                        <Route path={"/home/tweet/:id"}>
-                            <Paper style={{borderTop: 0, borderLeft: 0, borderRight: 0, padding: 10,}} variant={'outlined'}>
-                                <div className={classes.mainTweet}>
-                                    <BackButton/>
-                                    <Typography style={{fontWeight: 780}} variant={"h6"}>Твит</Typography>
-                                </div>
-                            </Paper>
+                        <Route exact path={"/home/tweet/:id"}>
+                            <AppTitle text={'Твит'} withBackButton={true}/>
                             <TweetPage/>
                         </Route>
                         <Route exact path={"/home"}>
@@ -132,6 +135,9 @@ const Home: React.FC = (): React.ReactElement => {
                                 </Link>
                             )) : <div style={{margin: 200}}><Loader/></div>}
                         </Route>
+                        <Route path={'/user/:id'}>
+                            <UserPage/>
+                        </Route>
                     </Paper>
                 </Grid>
                 <Grid item xs={3}>
@@ -141,5 +147,6 @@ const Home: React.FC = (): React.ReactElement => {
         </Container>
     )
 };
+
 // <Tweet _id={"9bwq1apw5c"} user={{fullname: "User", username:"user", avatarUrl: "https://bit.ly/3DWYupU"}} text={"Жили у бабуси два веселых гуся. Один серый, другой белый. Два веселых гуся)"}/>
 export default Home;

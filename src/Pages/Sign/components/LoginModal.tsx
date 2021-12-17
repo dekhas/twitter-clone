@@ -46,12 +46,10 @@ const LoginModal: React.FC<LoginModalProps> = ({open, handleClose}): React.React
         if (loadingState === LoadingState.ERROR) {
             setOpenNotification(true)
         } else if (loadingState === LoadingState.LOADED) {
-            // eslint-disable-next-line
             history.push('/home')
         }
+        // eslint-disable-next-line
     }, [loadingState]);
-
-    console.log(errors);
 
     const onSubmit = async (data: LoginForm) => {
         dispatch(fetchUser(data))

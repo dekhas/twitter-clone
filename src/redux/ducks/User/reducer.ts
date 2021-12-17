@@ -1,6 +1,6 @@
 import produce, {Draft} from "immer";
 import {UserState} from "./Contracts";
-import {UserActionTypes, UserActions} from "./actionCreators";
+import {UserActions, UserActionTypes} from "./actionCreators";
 import {LoadingState} from "../../../types/loadingState";
 
 const initialState:UserState = {
@@ -15,7 +15,11 @@ export const userReducer = produce((draft: Draft<UserState>, action: UserActions
             draft.loadingState = LoadingState.LOADED;
             break;
         }
-        case UserActionTypes.FETCH_USER: {
+        case UserActionTypes.REGISTER_USER: {
+            draft.loadingState = LoadingState.LOADING;
+            break;
+        }
+        case UserActionTypes.LOGIN_USER: {
             draft.loadingState = LoadingState.LOADING;
             break;
         }
@@ -23,6 +27,8 @@ export const userReducer = produce((draft: Draft<UserState>, action: UserActions
             draft.loadingState = action.payload;
             break;
         }
+        case UserActionTypes.AUTH_ME:
+            break;
         default:
             break;
     }
