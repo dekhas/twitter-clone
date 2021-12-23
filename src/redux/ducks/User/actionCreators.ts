@@ -10,6 +10,11 @@ export enum UserActionTypes {
     REGISTER_USER = 'user/REGISTER_USER',
     LOADING_STATE = "user/LOADING_STATE",
     AUTH_ME = 'user/AUTH_ME',
+    FETCH_USER = 'user/FETCH_USER',
+}
+
+export interface fetchUserInterface extends Action<UserActionTypes>  {
+    type: UserActionTypes.FETCH_USER,
 }
 
 export interface registerUserDataInterface extends Action<UserActionTypes> {
@@ -50,7 +55,7 @@ export const setUser = (payload: UserState["data"]): setUserDataInterface => ({
     payload,
 });
 
-export const fetchUser = (payload: LoginForm): loginUserDataInterface => ({
+export const loginUser = (payload: LoginForm): loginUserDataInterface => ({
     type: UserActionTypes.LOGIN_USER,
     payload,
 });
@@ -60,8 +65,13 @@ export const setUserLoadingState = (payload: LoadingState): setUserLoadingStateI
     payload,
 });
 
+export const fetchUser = (): authMeInterface => ({
+    type: UserActionTypes.AUTH_ME,
+});
+
 export type UserActions = setUserDataInterface |
     registerUserDataInterface |
     loginUserDataInterface |
     setUserLoadingStateInterface |
-    authMeInterface
+    authMeInterface |
+    fetchUserInterface

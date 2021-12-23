@@ -20,7 +20,7 @@ import {LoadingState} from "../../redux/ducks/Tweet/Contracts";
 import TweetPage from "./component/tweetPage"
 import Loader from "../../Components/Loader";
 import {authMe} from "../../redux/ducks/User/actionCreators";
-import AppTitle from "./component/appTitle";
+import AppTitle from "../../Components/appTitle";
 import UserPage from "../User";
 
 const Home: React.FC = (): React.ReactElement => {
@@ -115,14 +115,12 @@ const Home: React.FC = (): React.ReactElement => {
                 </Grid>
                 <Grid item xs={6}>
                     <Paper style={{height: "100%", borderBottom: 0, borderTop: 0,}} variant={"outlined"}>
-                        <Route exact path={"/home"}>
-                            <AppTitle text={"Главная"} withBackButton={false}/>
-                        </Route>
                         <Route exact path={"/home/tweet/:id"}>
                             <AppTitle text={'Твит'} withBackButton={true}/>
                             <TweetPage/>
                         </Route>
                         <Route exact path={"/home"}>
+                            <AppTitle text={"Главная"} withBackButton={false}/>
                             <Paper>
                                 <div style={{padding: 20}}>
                                     <AddTweetForm userName={"userName"} avatarURL={"https://bit.ly/3DWYupU"}/>

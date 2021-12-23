@@ -6,8 +6,9 @@ import {Switch, Route} from "react-router-dom"
 
 
 // todo
-// #1 Добавить токен после регистрации (backend)
-// #2 Поправить NavLink в Home
+// #1 Добавить токен после регистрации и выкидывать если не авторизован (backend)
+// #2 Добавить кол-во твитов
+// #3 Безопасность редактирования /edit
 
 function App() {
     return (

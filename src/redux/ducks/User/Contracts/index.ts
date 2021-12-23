@@ -7,7 +7,8 @@ export interface UserInterface {
     username: string;
     password: string;
     confirmed_hash: string;
-    token?: string,
+    avatar?: string;
+    token?: string;
     location?: string;
     confirmed?: boolean;
     about?: string;

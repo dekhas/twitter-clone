@@ -17,6 +17,8 @@ export const selectTweetLoadingState = (state: RootState) => getTweet(state).loa
 
 export const selectUserLoadingState = (state: RootState) => getUser(state).loadingState;
 
-export const selectUserData = (state: RootState) => getUser(state).data;
+export const selectUserId = (state: RootState) => getUser(state).data?.username;
+
+export const selectUserData = (state: RootState): UserState['data'] => getUser(state).data;
 
 export const selectIsAuth = (state: RootState) => !!getUser(state).data;

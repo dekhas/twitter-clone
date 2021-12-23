@@ -15,10 +15,6 @@ const useHomeStyles = makeStyles((theme: any) => ({
         display: "flex",
         marginBottom: 5,
         marginTop: 5,
-        "& a": {
-            color: 'black',
-            textDecoration: 'none',
-        },
         "&:hover": {
             "& div": {
                 backgroundColor: "rgba(29,161,242,0.1)",
@@ -47,8 +43,11 @@ const useHomeStyles = makeStyles((theme: any) => ({
         display: "flex",
         alignItems: "center",
         "& h6": {
-            marginLeft: 15,
+            marginLeft: 20,
         },
+        "& span": {
+            marginLeft: 20,
+        }
     },
 }));
 

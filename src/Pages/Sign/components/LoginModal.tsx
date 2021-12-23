@@ -12,7 +12,7 @@ import Alert from "@mui/material/Alert";
 import {useDispatch, useSelector} from "react-redux";
 import {selectUserLoadingState} from "../../../redux/selectors";
 import {LoadingState} from "../../../types/loadingState";
-import {fetchUser} from "../../../redux/ducks/User/actionCreators";
+import {loginUser} from "../../../redux/ducks/User/actionCreators";
 
 interface LoginModalProps {
     open: boolean,
@@ -52,7 +52,7 @@ const LoginModal: React.FC<LoginModalProps> = ({open, handleClose}): React.React
     }, [loadingState]);
 
     const onSubmit = async (data: LoginForm) => {
-        dispatch(fetchUser(data))
+        dispatch(loginUser(data))
     };
 
     const handleCloseNotification = () => {
