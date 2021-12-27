@@ -13,6 +13,9 @@ export interface UserInterface {
     confirmed?: boolean;
     about?: string;
     website?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    birthday?: string;
 }
 
 export interface UserState {

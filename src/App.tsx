@@ -4,13 +4,15 @@ import Sign from "./Pages/Sign";
 import Home from "./Pages/Home/"
 import {Switch, Route} from "react-router-dom"
 
-
 // todo
 // #1 Добавить токен после регистрации и выкидывать если не авторизован (backend)
 // #2 Добавить кол-во твитов
 // #3 Безопасность редактирования /edit
 
+
 function App() {
+
+
     return (
         <div>
             <Switch>

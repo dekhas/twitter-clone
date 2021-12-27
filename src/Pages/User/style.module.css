@@ -1,0 +1,26 @@
+.user_header {
+    height: 200px;
+    background-color: gray;
+}
+
+.user_info {
+    padding: 0 15px 15px;
+    margin-top: -70px;
+}
+
+.user_info_about {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.user_info_about li {
+    margin-right: 30px;
+    color: gray;
+}
+
+.user_info_about li a {
+    color: deepskyblue;
+}
