@@ -8,6 +8,11 @@
     margin-top: -70px;
 }
 
+.user_info_header {
+    display: flex;
+    justify-content: space-between;
+}
+
 .user_info_about {
     display: flex;
     flex-wrap: wrap;
@@ -23,4 +28,8 @@
 
 .user_info_about li a {
     color: deepskyblue;
+}
+
+.user_content_wrapper {
+    margin-top: 0;
 }

@@ -1,7 +1,8 @@
 import {
-    setTweets,
-    setTweetsLoadingState,
     addTweet,
+    FetchUserTweetsActionInterface,
+    setTweets,
+    setTweetsLoadingState, setUserTweets,
     TweetsActionTypes,
 } from "./actionCreators";
 import {call, put, takeLatest} from "redux-saga/effects";
@@ -28,7 +29,18 @@ export function* addTweetRequest({payload: text}: FetchTweetActionInterface) {
     }
 }
 
+export function* fetchUserTweetsRequests({payload: userID}: FetchUserTweetsActionInterface) {
+    try {
+        const userTweets: TweetState["userItems"] = yield call(TweetsAPI.fetchUserTweets, userID);
+        yield put(setUserTweets(userTweets.reverse()))
+    } catch (e) {
+        console.log(e);
+        yield put(setTweetsLoadingState(LoadingState.ERROR))
+    }
+}
+
 export function* tweetsSaga() {
     yield takeLatest(TweetsActionTypes.FETCH_TWEETS, fetchTweetsRequest);
     yield takeLatest(TweetsActionTypes.FETCH_ADD_TWEET, addTweetRequest);
+    yield takeLatest(TweetsActionTypes.FETCH_USER_TWEETS, fetchUserTweetsRequests);
 }

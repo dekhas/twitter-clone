@@ -19,5 +19,6 @@ export interface Tweet {
 
 export interface TweetState {
     items: Tweet[],
+    userItems: Tweet[],
     loadingState: LoadingState,
 }

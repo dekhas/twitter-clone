@@ -25,9 +25,6 @@ const useTweetStyles = makeStyles(() => ({
         },
     },
     tweets: {
-        borderTop: 0,
-        borderLeft: 0,
-        borderRight: 0,
         borderWidth: 1,
         padding: 10,
         cursor: "pointer",
@@ -61,7 +58,12 @@ const Tweet: React.FC<TweetProps> = ({user, createdAt, text, _id}: TweetProps): 
     };
 
     return (
-        <Paper className={classes.tweets} variant={"outlined"}>
+        <Paper style={{
+            borderTop: 0,
+            borderLeft: 0,
+            borderRight: 0,
+            borderRadius: 0,
+        }} className={classes.tweets} variant={"outlined"}>
             <Grid container spacing={3}>
                 <Grid item xs={1}>
                     <Avatar alt={"Profile Avatar" + user.username} src={user.avatarUrl}/>

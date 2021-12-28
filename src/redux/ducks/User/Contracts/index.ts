@@ -22,3 +22,11 @@ export interface UserState {
     data: UserInterface | null,
     loadingState: LoadingState
 }
+
+export interface UserUpdateInterface {
+    avatar?: string;
+    location?: string;
+    about?: string;
+    website?: string;
+    birthday?: string;
+}

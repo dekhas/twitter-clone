@@ -13,6 +13,8 @@ export const selectLoadingState = (state: RootState) => getTweetState(state).loa
 
 export const selectTweetData = (state: RootState) => getTweet(state).data;
 
+export const selectUserTweetsData = (state: RootState) => getTweetState(state).userItems;
+
 export const selectTweetLoadingState = (state: RootState) => getTweet(state).loadingState;
 
 export const selectUserLoadingState = (state: RootState) => getUser(state).loadingState;

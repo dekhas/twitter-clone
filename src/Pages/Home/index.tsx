@@ -50,8 +50,6 @@ const Home: React.FC = (): React.ReactElement => {
     const isLoading = useSelector(selectLoadingState);
     const user = useSelector(selectUserData);
 
-    console.log(tweets);
-
     return (
         <Container className={classes.wrapper} maxWidth={"lg"}>
             <Grid container spacing={3}>

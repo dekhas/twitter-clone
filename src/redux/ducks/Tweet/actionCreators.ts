@@ -7,6 +7,18 @@ export enum TweetsActionTypes {
     LOADING_STATE = "tweets/LOADING_STATE",
     FETCH_ADD_TWEET = "tweets/FETCH_ADD_TWEET",
     ADD_TWEET = "tweets/ADD_TWEET",
+    SET_USER_TWEETS = "tweets/SET_USER_TWEETS",
+    FETCH_USER_TWEETS = "tweets/FETCH_USER_TWEETS",
+}
+
+export interface FetchUserTweetsActionInterface extends Action<TweetsActionTypes> {
+    type: TweetsActionTypes.FETCH_USER_TWEETS,
+    payload: string,
+}
+
+export interface SetUserTweetsActionInterface extends Action<TweetsActionTypes> {
+    type: TweetsActionTypes.SET_USER_TWEETS,
+    payload: TweetState["userItems"],
 }
 
 export interface AddTweetActionCreator extends Action<TweetsActionTypes>{
@@ -32,6 +44,16 @@ export interface SetTweetsLoadingStateActionInterface extends Action<TweetsActio
     type: TweetsActionTypes.LOADING_STATE,
     payload: LoadingState,
 }
+
+export const fetchUserTweets = (payload: string): FetchUserTweetsActionInterface => ({
+    type: TweetsActionTypes.FETCH_USER_TWEETS,
+    payload,
+});
+
+export const setUserTweets = (payload: TweetState["userItems"]): SetUserTweetsActionInterface => ({
+    type: TweetsActionTypes.SET_USER_TWEETS,
+    payload,
+});
 
 export const addTweet = (payload: Tweet): AddTweetActionCreator => ({
     type: TweetsActionTypes.ADD_TWEET,
@@ -61,4 +83,6 @@ export type TweetsActions = SetTweetsActionInterface |
     FetchTweetsActionInterface |
     SetTweetsLoadingStateActionInterface |
     FetchAddTweetActionCreator |
-    AddTweetActionCreator;
+    AddTweetActionCreator |
+    SetUserTweetsActionInterface |
+    FetchUserTweetsActionInterface;

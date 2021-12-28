@@ -12,6 +12,9 @@ export const TweetsAPI = {
     addTweet(payload: string) {
         return axios.post<Response<Tweet>>("/tweet", {text: payload}).then(({data}) => data.data)
     },
+    fetchUserTweets(userID: string) {
+        return axios.get<Response<TweetState['items']>>(`/tweets/${userID}`).then(({data}) => data.data)
+    },
 };
 
 

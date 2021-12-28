@@ -1,9 +1,10 @@
 import produce, {Draft} from "immer";
 import {LoadingState, TweetState} from "./Contracts";
-import {TweetsActionTypes, TweetsActions} from "./actionCreators";
+import {TweetsActions, TweetsActionTypes} from "./actionCreators";
 
 const initialState:TweetState = {
     items: [],
+    userItems: [],
     loadingState: LoadingState.NEVER,
 };
 
@@ -28,6 +29,15 @@ export const tweetsReducer = produce((draft: Draft<TweetState>, action: TweetsAc
             break;
         }
         case TweetsActionTypes.FETCH_ADD_TWEET: {
+            break;
+        }
+        case TweetsActionTypes.FETCH_USER_TWEETS: {
+            draft.loadingState = LoadingState.LOADING;
+            break;
+        }
+        case TweetsActionTypes.SET_USER_TWEETS: {
+            draft.userItems = action.payload;
+            draft.loadingState = LoadingState.LOADED;
             break;
         }
         default:

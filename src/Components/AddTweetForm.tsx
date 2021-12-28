@@ -53,7 +53,7 @@ const useAddTweetFormStyles = makeStyles(() => ({
 
 interface AddTweetFormProps {
     userName: string,
-    avatarURL: string,
+    avatarURL?: string,
     maxRows?: number,
 }
 
