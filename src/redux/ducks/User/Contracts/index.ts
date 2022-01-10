@@ -1,4 +1,5 @@
 import {LoadingState} from "../../../../types/loadingState";
+import {ConversationInterface} from "../../Dialogs/Contracts";
 
 export interface UserInterface {
     _id?: string;
@@ -16,6 +17,7 @@ export interface UserInterface {
     createdAt?: string;
     updatedAt?: string;
     birthday?: string;
+    conversations?: string[] | ConversationInterface[];
 }
 
 export interface UserState {

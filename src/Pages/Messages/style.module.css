@@ -1,0 +1,86 @@
+.messages_no_messages_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 600px;
+    height: 100%;
+}
+
+.messages_no_messages {
+    display: flex;
+    width: 100%;
+}
+
+.messages_header {
+    padding: 10px;
+}
+
+.messages_header div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.messages_header div b {
+    font-size: 20px;
+}
+
+.messages_choose_friend {
+    display: flex;
+    padding: 5px;
+}
+
+.messages_choose_friend_info {
+    display: flex;
+    flex-direction: column;
+}
+
+.messages_choose_friend_info span {
+    color: gray;
+}
+
+.messages_choose_friend_background:hover {
+    background-color: rgb(245, 248, 250);
+}
+
+.send_message_input {
+    display: flex;
+    width: 100%;
+}
+
+.dialog_wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.your_message {
+    background-color: deepskyblue;
+}
+
+.someone_message {
+    background-color: grey;
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+}
+
+.messages span {
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: 500;
+}
+
+.your_message_box {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.someone_message_box {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: flex;
+}

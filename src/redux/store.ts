@@ -7,6 +7,8 @@ import {TweetData} from "./ducks/tweetPage/Contracts/state";
 import {UserState} from "./ducks/User/Contracts";
 import {tweetReducer} from "./ducks/tweetPage/reducer";
 import {userReducer} from "./ducks/User/reducer";
+import {DialogsInterface} from "./ducks/Dialogs/Contracts";
+import {dialogsReducer} from "./ducks/Dialogs/reducer";
 
 declare global {
     interface Window {
@@ -21,13 +23,15 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const reducers = combineReducers({
     tweets: tweetsReducer,
     tweet: tweetReducer,
-    user: userReducer
+    user: userReducer,
+    dialogs: dialogsReducer,
 });
 
 export interface RootState {
     tweets: TweetState,
     tweet: TweetData,
     user: UserState,
+    dialogs: DialogsInterface,
 }
 
 const store = createStore(reducers, composeEnhancers(applyMiddleware(sagaMiddleware)));

@@ -23,6 +23,7 @@ import {authMe} from "../../redux/ducks/User/actionCreators";
 import AppTitle from "../../Components/appTitle";
 import UserPage from "../User";
 
+
 const Home: React.FC = (): React.ReactElement => {
     document.title = "Home";
     const dispatch = useDispatch();
@@ -77,8 +78,9 @@ const Home: React.FC = (): React.ReactElement => {
                         <li className={classes.sideMenuItem}>
                             <div>
                                 <MailOutlineIcon fontSize={"large"}/>
-                                <Typography variant={"h6"} sx={{display: {"xs": "none", "md": "block"}}}>Сообщения</Typography>
-
+                                <NavLink to={'/home/messages'}>
+                                    <Typography variant={"h6"} sx={{display: {"xs": "none", "md": "block"}}}>Сообщения</Typography>
+                                </NavLink>
                             </div>
                         </li>
                         <li className={classes.sideMenuItem}>

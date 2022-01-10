@@ -16,6 +16,7 @@ import {fetchUserTweets} from "../../redux/ducks/Tweet/actionCreators";
 import Tweet from "../../Components/Tweet";
 import Paper from "@mui/material/Paper";
 import ChangeProfileModal from "./components/ChangeProfileModal";
+import {Link} from "react-router-dom";
 
 interface Params {
     id: string
@@ -92,7 +93,7 @@ const UserPage = () => {
                                 <div>
                                     <Button onClick={handleOpenEditProfile} style={{borderRadius: 30, position: "relative", top: "55%"}} variant={"contained"}
                                             color={"primary"}>
-                                        <Typography style={{textTransform: "none"}} variant={'inherit'}>Редактировать</Typography>
+                                        <Typography style={{textTransform: "none", fontWeight: 600}} variant={'inherit'}>Редактировать</Typography>
                                     </Button>
                                     <ChangeProfileModal open={open} handleClose={handleCloseEditProfile} handleChangeUserData={handleChangeUserData}/>
                                 </div>
@@ -132,18 +133,22 @@ const UserPage = () => {
                     </Paper>
                     <div className={style.user_content_wrapper}>
                         <TabPanel value={tabIndex} index={0}>
-                            {userTweets ? userTweets.map((item, index) => {
+                            {userTweets ? userTweets.length !== 0 ? userTweets.map((item, index) => {
                                 return (
                                     <div key={`${item._id}_${index}`}>
-                                        <Tweet {...item}/>
+                                        <Link to={`/home/tweet/${item._id}`}>
+                                            <Tweet {...item}/>
+                                        </Link>
                                     </div>
                                 )
-                            }) : <Loader/>}
+                            }) : <div className={style.user_content_no_tweets}>
+                                <h1>Твиты отсутствуют</h1>
+                            </div> : <Loader/>}
                         </TabPanel>
                         <TabPanel value={tabIndex} index={1}/>
                         <TabPanel value={tabIndex} index={2}/>
                     </div>
-                </div> : <Loader/>}
+                </div> : <div className={style.user_loader}><Loader/></div>}
         </div>
     )
 };

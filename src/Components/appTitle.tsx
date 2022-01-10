@@ -13,7 +13,7 @@ const AppTitle: React.FC<TitleProps> = ({text, withBackButton, children}): React
     const classes = useHomeStyles();
 
     return (
-        <Paper style={{borderTop: 0, borderLeft: 0, borderRight: 0, padding: 10, borderRadius: 0, backgroundColor: "rgba(255, 255, 255, 0.5)", backdropFilter: "blur(5px)", top: 0, position: "sticky", zIndex: 100}} variant={'outlined'}>
+        <Paper style={{borderTop: 0, borderLeft: 0, borderRight: 0, padding: 10, borderRadius: 0, backgroundColor: "rgba(255, 255, 255, 0.7)", backdropFilter: "blur(7px)", top: 0, position: "sticky", zIndex: 100}} variant={'outlined'}>
             <div className={withBackButton ? classes.mainTweet : undefined}>
                 {withBackButton ? <BackButton/> : null}
                 <div>

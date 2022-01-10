@@ -2,18 +2,6 @@ import {createTheme} from "@mui/material";
 import {red} from "@mui/material/colors";
 
 export const theme = createTheme({
-    typography: {
-        // @ts-ignore
-        fontFamily: [
-            "ui-system",
-            "sans-serif",
-            'BlinkMacSystemFont',
-            '"Segoe UI"',
-            'Roboto',
-            '"Helvetica Neue"',
-            'Arial',
-        ],
-    },
     palette: {
         primary: {
             main: "rgb(29, 161, 242)",
@@ -30,8 +18,6 @@ export const theme = createTheme({
             default: "#fff"
         },
     },
-    // @ts-ignore
-    shadows: [],
     components: {
         MuiButton: {
             styleOverrides: {

@@ -33,3 +33,15 @@
 .user_content_wrapper {
     margin-top: 0;
 }
+
+.user_content_no_tweets {
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.user_loader {
+    position: relative;
+    left: 50%;
+}
