@@ -26,6 +26,10 @@ const UserDialog: React.FC<UserDialogProps> = ({messages, userID, activeIndex,})
 
     React.useEffect(() => {
         socket.emit('initialize conversations', user?.conversations);
+        socket.on('set conversation message', (data: MessagesInterface) => {
+            console.log(111111);
+            dispatch(addMessage(data, activeIndex))
+        });
     }, []);
 
     console.log(messages);
@@ -36,10 +40,6 @@ const UserDialog: React.FC<UserDialogProps> = ({messages, userID, activeIndex,})
         }
     };
 
-    socket.on('set conversation message', (data: MessagesInterface) => {
-        dispatch(addMessage(data, activeIndex))
-    });
-
     const handleSubmitMessage = () => {
         const data = {
             user: userID,
@@ -47,8 +47,8 @@ const UserDialog: React.FC<UserDialogProps> = ({messages, userID, activeIndex,})
             // @ts-ignore
             conversation: user?.conversations[activeIndex],
         };
-        dispatch(addMessage(data, activeIndex));
         setMessage('');
+        dispatch(addMessage(data, activeIndex));
         // @ts-ignore
         socket.emit('send private message', message, userID, user?.conversations[activeIndex], );
     };

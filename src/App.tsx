@@ -6,10 +6,7 @@ import {Switch, Route} from "react-router-dom"
 import Messages from "./Pages/Messages";
 
 // todo
-// #1 Добавить токен после регистрации и выкидывать если не авторизован (backend)
-// #2 Добавить кол-во твитов
-// #3 Безопасность редактирования /edit
-// #4 Поправить тип в ClearObject
+// #1 выкидывать если не авторизован (backend)
 
 
 function App() {
