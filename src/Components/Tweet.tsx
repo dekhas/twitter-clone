@@ -45,7 +45,7 @@ interface TweetProps {
     createdAt: string
 }
 
-const Tweet: React.FC<TweetProps> = ({user, createdAt, text, _id}: TweetProps): React.ReactElement => {
+const Tweet: React.FC<TweetProps> = ({user, createdAt, text, _id}): React.ReactElement => {
     const classes = useTweetStyles();
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);

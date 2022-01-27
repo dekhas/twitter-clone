@@ -2,6 +2,7 @@ import {axios} from "../../core/axios";
 import Response from "../../types/ResponseType";
 import {UserInterface, UserUpdateInterface} from "../../redux/ducks/User/Contracts";
 import {DialogsInterface} from "../../redux/ducks/Dialogs/Contracts";
+import {Tweet} from "../../redux/ducks/Tweet/Contracts";
 
 const UserAPI = {
     async getUser(payload: string) {
@@ -15,6 +16,10 @@ const UserAPI = {
     },
     async getConversations() {
         const {data} = await axios.get<Response<DialogsInterface['data']>>(`/user/conversations`);
+        return data.data
+    },
+    async getBookmarks() {
+        const {data} = await axios.get<Response<Tweet[]>>(`/bookmark`);
         return data.data
     }
 };

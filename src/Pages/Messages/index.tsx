@@ -80,8 +80,9 @@ const Messages = () => {
                             <li className={classes.sideMenuItem}>
                                 <div>
                                     <BookmarkBorderIcon fontSize={"large"}/>
-                                    <Typography variant={"h6"}
-                                                sx={{display: {"xs": "none", "md": "block"}}}>Закладки</Typography>
+                                    <NavLink to={'/bookmarks'}>
+                                        <Typography variant={"h6"} sx={{display: {"xs": "none", "md": "block"}}}>Закладки</Typography>
+                                    </NavLink>
                                 </div>
                             </li>
                             <li className={classes.sideMenuItem}>

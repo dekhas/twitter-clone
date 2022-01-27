@@ -27,6 +27,16 @@ export const userReducer = produce((draft: Draft<UserState>, action: UserActions
             draft.loadingState = action.payload;
             break;
         }
+        case UserActionTypes.SET_BOOKMARKS: {
+            if (draft.data) {
+                draft.data.bookmarks = action.payload;
+            }
+            break;
+        }
+        case UserActionTypes.FETCH_BOOKMARKS:
+            break;
+        case UserActionTypes.FETCH_USER:
+            break;
         case UserActionTypes.AUTH_ME:
             break;
         default:

@@ -1,7 +1,8 @@
 import {call, put, takeLatest} from "redux-saga/effects";
 import {
+    fetchBookmarks,
     loginUserDataInterface,
-    registerUserDataInterface,
+    registerUserDataInterface, setBookmarks,
     setUser,
     setUserLoadingState,
     UserActionTypes
@@ -10,6 +11,8 @@ import {UserInterface, UserState} from "./Contracts";
 import {AuthAPI} from "../../../Services/api/authAPI";
 import {LoadingState} from "../../../types/loadingState";
 import setToken from "../../../utils/setToken";
+import {Tweet} from "../Tweet/Contracts";
+import UserAPI from "../../../Services/api/userAPI";
 
 export function* loginUserRequest({payload: loginData}: loginUserDataInterface) {
     try {
@@ -30,21 +33,30 @@ export function* registerUserRequest({payload: registerData}: registerUserDataIn
         setToken(data?.token);
         yield put(setUser(data));
         yield put(setUserLoadingState(LoadingState.LOADED));
-        yield put(setUserLoadingState(LoadingState.NEVER))
+        yield put(setUserLoadingState(LoadingState.NEVER));
     } catch (e) {
         yield put(setUserLoadingState(LoadingState.ERROR))
     }
 }
 
+export function* fetchBookmarksRequest() {
+    try {
+        const data: Tweet[] = yield call(UserAPI.getBookmarks);
+        yield put(setBookmarks(data))
+    } catch (e) {}
+}
+
 export function* authMeRequest() {
     try {
         const data:UserInterface = yield call(AuthAPI.authMe);
-        yield put(setUser(data))
+        yield put(setUser(data));
+        yield put(fetchBookmarks());
     } catch (e) {}
 }
 
 export function* userSaga() {
     yield takeLatest(UserActionTypes.LOGIN_USER, loginUserRequest);
     yield takeLatest(UserActionTypes.AUTH_ME, authMeRequest);
-    yield takeLatest(UserActionTypes.REGISTER_USER, registerUserRequest)
+    yield takeLatest(UserActionTypes.REGISTER_USER, registerUserRequest);
+    yield takeLatest(UserActionTypes.FETCH_BOOKMARKS, fetchBookmarksRequest);
 }

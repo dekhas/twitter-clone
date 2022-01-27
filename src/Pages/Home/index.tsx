@@ -22,6 +22,7 @@ import Loader from "../../Components/Loader";
 import {authMe} from "../../redux/ducks/User/actionCreators";
 import AppTitle from "../../Components/appTitle";
 import UserPage from "../User";
+import Bookmarks from "../Bookmarks";
 
 
 const Home: React.FC = (): React.ReactElement => {
@@ -53,7 +54,7 @@ const Home: React.FC = (): React.ReactElement => {
 
     return (
         <Container className={classes.wrapper} maxWidth={"lg"}>
-            <Grid container spacing={3}>
+            <Grid style={{height: "100vh"}} container spacing={3}>
                 <Grid item xs={3}>
                     <ul className={classes.sideMenu}>
                         <li className={classes.sideMenuItem}>
@@ -86,7 +87,9 @@ const Home: React.FC = (): React.ReactElement => {
                         <li className={classes.sideMenuItem}>
                             <div>
                                 <BookmarkBorderIcon fontSize={"large"}/>
-                                <Typography variant={"h6"} sx={{display: {"xs": "none", "md": "block"}}}>Закладки</Typography>
+                                <NavLink to={'/bookmarks'}>
+                                    <Typography variant={"h6"} sx={{display: {"xs": "none", "md": "block"}}}>Закладки</Typography>
+                                </NavLink>
                             </div>
                         </li>
                         <li className={classes.sideMenuItem}>
@@ -135,6 +138,9 @@ const Home: React.FC = (): React.ReactElement => {
                         </Route>
                         <Route path={'/user/:id'}>
                             <UserPage/>
+                        </Route>
+                        <Route path={'/bookmarks'}>
+                            <Bookmarks username={user ? user.username : ''} bookmarks={user?.bookmarks}/>
                         </Route>
                     </Paper>
                 </Grid>

@@ -3,6 +3,7 @@ import {UserState} from "./Contracts";
 import {Action} from "redux";
 import {LoginForm} from "../../../Pages/Sign/components/LoginModal";
 import {RegisterForm} from "../../../Pages/Sign/components/RegisterModal";
+import {Tweet} from "../Tweet/Contracts";
 
 export enum UserActionTypes {
     SET_USER_DATA = "user/SET_USER_DATA",
@@ -11,6 +12,18 @@ export enum UserActionTypes {
     LOADING_STATE = "user/LOADING_STATE",
     AUTH_ME = 'user/AUTH_ME',
     FETCH_USER = 'user/FETCH_USER',
+    FETCH_BOOKMARKS = 'user/FETCH_BOOKMARKS',
+    SET_BOOKMARKS = 'user/SET_BOOKMARKS',
+    //ADD_BOOKMARKS = 'user/ADD_BOOKMARKS',
+}
+
+export interface fetchBookmarksInterface extends Action<UserActionTypes> {
+    type: UserActionTypes.FETCH_BOOKMARKS,
+}
+
+export interface setBookmarksInterface extends Action<UserActionTypes>{
+    type: UserActionTypes.SET_BOOKMARKS,
+    payload: Tweet[],
 }
 
 export interface fetchUserInterface extends Action<UserActionTypes>  {
@@ -40,6 +53,15 @@ export interface loginUserDataInterface extends Action<UserActionTypes> {
 export interface authMeInterface extends Action<UserActionTypes>  {
     type: UserActionTypes.AUTH_ME,
 }
+
+export const fetchBookmarks = (): fetchBookmarksInterface => ({
+    type: UserActionTypes.FETCH_BOOKMARKS,
+});
+
+export const setBookmarks = (payload: Tweet[]): setBookmarksInterface => ({
+    type: UserActionTypes.SET_BOOKMARKS,
+    payload,
+});
 
 export const registerUser = (payload: RegisterForm): registerUserDataInterface => ({
     type: UserActionTypes.REGISTER_USER,
@@ -74,4 +96,6 @@ export type UserActions = setUserDataInterface |
     loginUserDataInterface |
     setUserLoadingStateInterface |
     authMeInterface |
-    fetchUserInterface
+    fetchUserInterface |
+    fetchBookmarksInterface |
+    setBookmarksInterface
