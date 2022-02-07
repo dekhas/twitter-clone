@@ -21,7 +21,7 @@ const Bookmarks: React.FC<BookmarksPropsInterface> = ({bookmarks, username}): Re
                     </AppTitle>
                     {bookmarks?.map((item, index) => {
                         return <div key={`${item._id}_${index}_bookmark`}>
-                            <Tweet {...item} />
+                            <Tweet {...item} bookmarked/>
                         </div>
                     })}
                 </div>

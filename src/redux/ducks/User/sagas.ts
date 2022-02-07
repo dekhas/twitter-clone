@@ -1,5 +1,6 @@
 import {call, put, takeLatest} from "redux-saga/effects";
 import {
+    deleteBookmarkInterface,
     fetchBookmarks,
     loginUserDataInterface,
     registerUserDataInterface, setBookmarks,
@@ -54,9 +55,18 @@ export function* authMeRequest() {
     } catch (e) {}
 }
 
+export function* deleteBookmarkRequest({payload: tweetID}: deleteBookmarkInterface) {
+    try {
+        yield call(UserAPI.deleteBookmark, tweetID)
+    } catch (e) {
+        console.log(e)
+    }
+}
+
 export function* userSaga() {
     yield takeLatest(UserActionTypes.LOGIN_USER, loginUserRequest);
     yield takeLatest(UserActionTypes.AUTH_ME, authMeRequest);
     yield takeLatest(UserActionTypes.REGISTER_USER, registerUserRequest);
     yield takeLatest(UserActionTypes.FETCH_BOOKMARKS, fetchBookmarksRequest);
+    yield takeLatest(UserActionTypes.DELETE_BOOKMARK, deleteBookmarkRequest);
 }

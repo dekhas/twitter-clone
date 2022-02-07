@@ -14,7 +14,18 @@ export enum UserActionTypes {
     FETCH_USER = 'user/FETCH_USER',
     FETCH_BOOKMARKS = 'user/FETCH_BOOKMARKS',
     SET_BOOKMARKS = 'user/SET_BOOKMARKS',
-    //ADD_BOOKMARKS = 'user/ADD_BOOKMARKS',
+    ADD_USER_BOOKMARK = 'user/ADD_USER_BOOKMARK',
+    DELETE_BOOKMARK = 'user/DELETE_BOOKMARK'
+}
+
+export interface deleteBookmarkInterface extends Action<UserActionTypes>{
+    type: UserActionTypes.DELETE_BOOKMARK,
+    payload: string,
+}
+
+export interface addUserBookmarkInterface extends Action<UserActionTypes> {
+    type: UserActionTypes.ADD_USER_BOOKMARK,
+    payload: Tweet,
 }
 
 export interface fetchBookmarksInterface extends Action<UserActionTypes> {
@@ -54,6 +65,11 @@ export interface authMeInterface extends Action<UserActionTypes>  {
     type: UserActionTypes.AUTH_ME,
 }
 
+export const deleteBookmark = (payload: string): deleteBookmarkInterface => ({
+    type: UserActionTypes.DELETE_BOOKMARK,
+    payload,
+});
+
 export const fetchBookmarks = (): fetchBookmarksInterface => ({
     type: UserActionTypes.FETCH_BOOKMARKS,
 });
@@ -91,6 +107,11 @@ export const fetchUser = (): authMeInterface => ({
     type: UserActionTypes.AUTH_ME,
 });
 
+export const addUserBookmark = (payload: Tweet): addUserBookmarkInterface => ({
+    type: UserActionTypes.ADD_USER_BOOKMARK,
+    payload,
+});
+
 export type UserActions = setUserDataInterface |
     registerUserDataInterface |
     loginUserDataInterface |
@@ -98,4 +119,6 @@ export type UserActions = setUserDataInterface |
     authMeInterface |
     fetchUserInterface |
     fetchBookmarksInterface |
-    setBookmarksInterface
+    setBookmarksInterface |
+    addUserBookmarkInterface |
+    deleteBookmarkInterface;

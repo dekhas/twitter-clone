@@ -20,12 +20,14 @@ export const tweetsReducer = produce((draft: Draft<TweetState>, action: TweetsAc
             draft.loadingState = LoadingState.LOADING;
             break;
         }
+        
         case TweetsActionTypes.LOADING_STATE: {
             draft.loadingState = action.payload;
             break;
         }
         case TweetsActionTypes.ADD_TWEET: {
-            draft.items.push(action.payload);
+            draft.items.unshift(action.payload);
+            draft.userItems.unshift(action.payload);
             break;
         }
         case TweetsActionTypes.FETCH_ADD_TWEET: {
@@ -38,6 +40,14 @@ export const tweetsReducer = produce((draft: Draft<TweetState>, action: TweetsAc
         case TweetsActionTypes.SET_USER_TWEETS: {
             draft.userItems = action.payload;
             draft.loadingState = LoadingState.LOADED;
+            break;
+        }
+        case TweetsActionTypes.DELETE_TWEET: {
+            draft.items = draft.items.filter(item => item._id !== action.payload);
+            draft.userItems = draft.userItems.filter(item => item._id !== action.payload);
+            break;
+        }
+        case TweetsActionTypes.ADD_BOOKMARKS: {
             break;
         }
         default:

@@ -2,7 +2,7 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router";
 import {fetchTweet} from "../../../redux/ducks/tweetPage/Contracts/actionCreators";
-import {selectTweetData} from "../../../redux/selectors";
+import {selectTweetData, selectUserData} from "../../../redux/selectors";
 import Tweet from "../../../Components/Tweet";
 import Loader from "../../../Components/Loader";
 
@@ -11,6 +11,7 @@ const TweetPage:React.FC = ():React.ReactElement | null => {
     const params: {id: string} = useParams();
     const id = params.id;
     const tweetData = useSelector(selectTweetData);
+    const user = useSelector(selectUserData);
 
     React.useEffect(() => {
         if (id) {
@@ -26,7 +27,7 @@ const TweetPage:React.FC = ():React.ReactElement | null => {
     }
 
     return (
-        <Tweet {...tweetData}/>
+        <Tweet {...tweetData} bookmarked={!!user?.bookmarks?.find((elem) => elem._id === id)}/>
     );
 };
 

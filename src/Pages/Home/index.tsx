@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Container, Grid, IconButton, Paper, Typography,} from "@mui/material/";
-import {Link, NavLink, Route} from "react-router-dom";
+import {NavLink, Route} from "react-router-dom";
 import TwitterIcon from '@mui/icons-material/Twitter';
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
@@ -39,7 +39,7 @@ const Home: React.FC = (): React.ReactElement => {
         // eslint-disable-next-line
     }, []);
 
-    const[isAddTweetOpen, setIsAddTweetOpen] = useState<boolean>(false);
+    const [isAddTweetOpen, setIsAddTweetOpen] = useState<boolean>(false);
 
     const handleIsOpen = () => {
         setIsAddTweetOpen(!isAddTweetOpen);
@@ -67,20 +67,23 @@ const Home: React.FC = (): React.ReactElement => {
                         <li className={classes.sideMenuItem}>
                             <div>
                                 <SearchIcon fontSize={"large"}/>
-                                <Typography variant={"h6"} sx={{display: {"xs": "none", "md": "block"}}}>Поиск</Typography>
+                                <Typography variant={"h6"}
+                                            sx={{display: {"xs": "none", "md": "block"}}}>Поиск</Typography>
                             </div>
                         </li>
                         <li className={classes.sideMenuItem}>
                             <div>
                                 <NotificationsNoneIcon fontSize={"large"}/>
-                                <Typography variant={"h6"} sx={{display: {"xs": "none", "md": "block"}}}>Оповещения</Typography>
+                                <Typography variant={"h6"}
+                                            sx={{display: {"xs": "none", "md": "block"}}}>Оповещения</Typography>
                             </div>
                         </li>
                         <li className={classes.sideMenuItem}>
                             <div>
                                 <MailOutlineIcon fontSize={"large"}/>
                                 <NavLink to={'/home/messages'}>
-                                    <Typography variant={"h6"} sx={{display: {"xs": "none", "md": "block"}}}>Сообщения</Typography>
+                                    <Typography variant={"h6"}
+                                                sx={{display: {"xs": "none", "md": "block"}}}>Сообщения</Typography>
                                 </NavLink>
                             </div>
                         </li>
@@ -88,27 +91,36 @@ const Home: React.FC = (): React.ReactElement => {
                             <div>
                                 <BookmarkBorderIcon fontSize={"large"}/>
                                 <NavLink to={'/bookmarks'}>
-                                    <Typography variant={"h6"} sx={{display: {"xs": "none", "md": "block"}}}>Закладки</Typography>
+                                    <Typography variant={"h6"}
+                                                sx={{display: {"xs": "none", "md": "block"}}}>Закладки</Typography>
                                 </NavLink>
                             </div>
                         </li>
                         <li className={classes.sideMenuItem}>
                             <div>
                                 <ListAltIcon fontSize={"large"}/>
-                                <Typography variant={"h6"} sx={{display: {"xs": "none", "md": "block"}}}>Список</Typography>
+                                <Typography variant={"h6"}
+                                            sx={{display: {"xs": "none", "md": "block"}}}>Список</Typography>
                             </div>
                         </li>
                         <li className={classes.sideMenuItem}>
                             <div>
                                 <PersonOutlineIcon fontSize={"large"}/>
                                 <NavLink to={`/user/${user?.username}`}>
-                                    <Typography variant={"h6"} sx={{display: {"xs": "none", "md": "block"}}}>Профиль</Typography>
+                                    <Typography variant={"h6"}
+                                                sx={{display: {"xs": "none", "md": "block"}}}>Профиль</Typography>
                                 </NavLink>
                             </div>
                         </li>
                         <li>
-                            <Button onClick={handleIsOpen} style={{borderRadius: 30, marginTop:25}} variant={"contained"} color={"primary"} fullWidth>
-                                <Typography style={{paddingTop: 10,paddingBottom: 10, textTransform: "none", fontWeight: 700}}>Твитнуть</Typography>
+                            <Button onClick={handleIsOpen} style={{borderRadius: 30, marginTop: 25}}
+                                    variant={"contained"} color={"primary"} fullWidth>
+                                <Typography style={{
+                                    paddingTop: 10,
+                                    paddingBottom: 10,
+                                    textTransform: "none",
+                                    fontWeight: 700
+                                }}>Твитнуть</Typography>
                             </Button>
                             <ModalDialog title={"Твитнуть"} visible={isAddTweetOpen} closeVisible={handleIsOpen}>
                                 <AddTweetForm maxRows={15} userName={"userName"} avatarURL={"https://bit.ly/3DWYupU"}/>
@@ -130,10 +142,10 @@ const Home: React.FC = (): React.ReactElement => {
                                 </div>
                             </Paper>
                             <div style={{height: 12, backgroundColor: "lightGrey"}}/>
-                            { isLoading === LoadingState.LOADED ? tweets.map((item) => (
-                                <Link key={item._id} to={`/home/tweet/${item._id}`} style={{textDecoration: "none", font: "inherit"}}>
-                                    <Tweet {...item}/>
-                                </Link>
+                            {isLoading === LoadingState.LOADED ? tweets.map((item, index) => (
+                                <div key={`${item}_${index}`}>
+                                    <Tweet {...item} link={item._id} bookmarked={!!user?.bookmarks?.find((elem) => elem._id === item._id)}/>
+                                </div>
                             )) : <div style={{margin: 200}}><Loader/></div>}
                         </Route>
                         <Route path={'/user/:id'}>
@@ -145,7 +157,7 @@ const Home: React.FC = (): React.ReactElement => {
                     </Paper>
                 </Grid>
                 <Grid item xs={3}>
-                    <p style={{position: "sticky", top:0,}}>Coming soon...</p>
+                    <p style={{position: "sticky", top: 0,}}>Coming soon...</p>
                 </Grid>
             </Grid>
         </Container>

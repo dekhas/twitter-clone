@@ -16,7 +16,6 @@ import {fetchUserTweets} from "../../redux/ducks/Tweet/actionCreators";
 import Tweet from "../../Components/Tweet";
 import Paper from "@mui/material/Paper";
 import ChangeProfileModal from "./components/ChangeProfileModal";
-import {Link} from "react-router-dom";
 
 interface Params {
     id: string
@@ -58,7 +57,6 @@ const UserPage = () => {
     };
 
 
-
     document.title = userData ? `${userData?.fullname} (@${userData?.username})` : '';
 
     useEffect(() => {
@@ -91,18 +89,27 @@ const UserPage = () => {
                                     src={userData?.avatar}/>
                             {isRegister ?
                                 <div>
-                                    <Button onClick={handleOpenEditProfile} style={{borderRadius: 30, position: "relative", top: "55%"}} variant={"contained"}
+                                    <Button onClick={handleOpenEditProfile}
+                                            style={{borderRadius: 30, position: "relative", top: "55%"}}
+                                            variant={"contained"}
                                             color={"primary"}>
-                                        <Typography style={{textTransform: "none", fontWeight: 600}} variant={'inherit'}>Редактировать</Typography>
+                                        <Typography style={{textTransform: "none", fontWeight: 600}}
+                                                    variant={'inherit'}>Редактировать</Typography>
                                     </Button>
-                                    <ChangeProfileModal open={open} handleClose={handleCloseEditProfile} handleChangeUserData={handleChangeUserData}/>
+                                    <ChangeProfileModal open={open} handleClose={handleCloseEditProfile}
+                                                        handleChangeUserData={handleChangeUserData}/>
                                 </div>
                                 :
-                            <div>
-                                <Button style={{borderRadius: 30, backgroundColor: 'black', position: "relative", top: "55%"}} variant={"contained"}>
-                                    <b style={{textTransform: "none", fontWeight: 700}}>Читать</b>
-                                </Button>
-                            </div>}
+                                <div>
+                                    <Button style={{
+                                        borderRadius: 30,
+                                        backgroundColor: 'black',
+                                        position: "relative",
+                                        top: "55%"
+                                    }} variant={"contained"}>
+                                        <b style={{textTransform: "none", fontWeight: 700}}>Читать</b>
+                                    </Button>
+                                </div>}
                         </div>
                         <h2 style={{margin: 0}}>{userData?.fullname}</h2>
                         <span style={{color: 'gray'}}>@{userData?.username}</span>
@@ -136,9 +143,7 @@ const UserPage = () => {
                             {userTweets ? userTweets.length !== 0 ? userTweets.map((item, index) => {
                                 return (
                                     <div key={`${item._id}_${index}`}>
-                                        <Link to={`/home/tweet/${item._id}`}>
-                                            <Tweet {...item}/>
-                                        </Link>
+                                        <Tweet {...item} link={item._id} bookmarked={!!userData?.bookmarks?.find((elem) => elem._id === item._id)}/>
                                     </div>
                                 )
                             }) : <div className={style.user_content_no_tweets}>

@@ -21,6 +21,10 @@ const UserAPI = {
     async getBookmarks() {
         const {data} = await axios.get<Response<Tweet[]>>(`/bookmark`);
         return data.data
+    },
+    async deleteBookmark(tweetID: string) {
+        const {data} = await axios.delete<Response<null>>(`/bookmark/${tweetID}`);
+        return data.data
     }
 };
 

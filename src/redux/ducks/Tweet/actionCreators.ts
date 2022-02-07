@@ -9,6 +9,19 @@ export enum TweetsActionTypes {
     ADD_TWEET = "tweets/ADD_TWEET",
     SET_USER_TWEETS = "tweets/SET_USER_TWEETS",
     FETCH_USER_TWEETS = "tweets/FETCH_USER_TWEETS",
+    ADD_BOOKMARKS = 'tweets/ADD_BOOKMARKS',
+    DELETE_TWEET = 'tweets/DELETE_TWEET',
+}
+
+export interface deleteTweetInterface extends Action<TweetsActionTypes> {
+    type: TweetsActionTypes.DELETE_TWEET,
+    payload: string,
+}
+
+export interface addBookmarkInterface extends Action<TweetsActionTypes> {
+    type: TweetsActionTypes.ADD_BOOKMARKS,
+    tweetID: string,
+    tweet: Tweet,
 }
 
 export interface FetchUserTweetsActionInterface extends Action<TweetsActionTypes> {
@@ -45,6 +58,11 @@ export interface SetTweetsLoadingStateActionInterface extends Action<TweetsActio
     payload: LoadingState,
 }
 
+export const deleteTweet = (payload: string): deleteTweetInterface => ({
+    type: TweetsActionTypes.DELETE_TWEET,
+    payload,
+});
+
 export const fetchUserTweets = (payload: string): FetchUserTweetsActionInterface => ({
     type: TweetsActionTypes.FETCH_USER_TWEETS,
     payload,
@@ -79,10 +97,18 @@ export const setTweetsLoadingState = (payload: LoadingState): SetTweetsLoadingSt
     payload,
 });
 
+export const addBookmark = (tweet: Tweet, tweetID: string): addBookmarkInterface => ({
+    type: TweetsActionTypes.ADD_BOOKMARKS,
+    tweet,
+    tweetID,
+});
+
 export type TweetsActions = SetTweetsActionInterface |
     FetchTweetsActionInterface |
     SetTweetsLoadingStateActionInterface |
     FetchAddTweetActionCreator |
     AddTweetActionCreator |
     SetUserTweetsActionInterface |
-    FetchUserTweetsActionInterface;
+    FetchUserTweetsActionInterface |
+    addBookmarkInterface |
+    deleteTweetInterface;

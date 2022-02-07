@@ -15,6 +15,12 @@ export const TweetsAPI = {
     fetchUserTweets(userID: string) {
         return axios.get<Response<TweetState['items']>>(`/tweets/${userID}`).then(({data}) => data.data)
     },
+    addBookmark(tweetID: string) {
+        return axios.post<Response<null>>('/bookmark', {tweet: tweetID})
+    },
+    deleteTweet(tweetID: string) {
+        return axios.delete<Response<null>>(`/tweets/${tweetID}`)
+    }
 };
 
 

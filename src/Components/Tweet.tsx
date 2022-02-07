@@ -10,6 +10,11 @@ import {formatTime} from "../utils/formate";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import {useHistory} from "react-router";
+import {useDispatch} from "react-redux";
+import {addBookmark, deleteTweet} from "../redux/ducks/Tweet/actionCreators";
+import {Tweet as TweetInterface} from "../redux/ducks/Tweet/Contracts";
+import {deleteBookmark} from "../redux/ducks/User/actionCreators";
 
 const useTweetStyles = makeStyles(() => ({
     tweetsIcons: {
@@ -42,19 +47,58 @@ interface TweetProps {
         avatarUrl: string,
     },
     text: string,
-    createdAt: string
+    createdAt: string,
+    link?: string,
+    bookmarked: boolean,
 }
 
-const Tweet: React.FC<TweetProps> = ({user, createdAt, text, _id}): React.ReactElement => {
+const Tweet: React.FC<TweetProps> = ({user, createdAt, text, _id, link, bookmarked}): React.ReactElement => {
     const classes = useTweetStyles();
+
+    const history = useHistory();
+
+    const dispatch = useDispatch();
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
+        event.stopPropagation()
     };
-    const handleClose = () => {
+    const handleClose = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(null);
+        event.stopPropagation()
+    };
+
+    const handleAddBookmark = (event: React.MouseEvent<HTMLElement>) => {
+        const tweetData: TweetInterface = {
+            _id,
+            user,
+            text,
+            createdAt,
+        };
+
+        dispatch(addBookmark(tweetData, _id));
+
+        event.stopPropagation()
+    };
+
+    const handleDeleteBookmark = (event: React.MouseEvent<HTMLElement>) => {
+        dispatch(deleteBookmark(_id));
+
+        event.stopPropagation()
+    };
+
+    const handleDeleteTweet = (event: React.MouseEvent<HTMLElement>) => {
+        dispatch(deleteTweet(_id));
+
+        event.stopPropagation();
+    };
+
+    const changeLink = () => {
+        if (link) {
+            history.push(`/home/tweet/${link}`)
+        }
     };
 
     return (
@@ -63,7 +107,7 @@ const Tweet: React.FC<TweetProps> = ({user, createdAt, text, _id}): React.ReactE
             borderLeft: 0,
             borderRight: 0,
             borderRadius: 0,
-        }} className={classes.tweets} variant={"outlined"}>
+        }} onClick={changeLink} className={classes.tweets} variant={"outlined"}>
             <Grid container spacing={3}>
                 <Grid item xs={1}>
                     <Avatar alt={"Profile Avatar" + user.username} src={user.avatarUrl}/>
@@ -92,7 +136,9 @@ const Tweet: React.FC<TweetProps> = ({user, createdAt, text, _id}): React.ReactE
                                       anchorEl={anchorEl}
                                       open={open}
                                       onClose={handleClose}>
-                                    <MenuItem onClick={handleClose}>Удалить</MenuItem>
+                                    <MenuItem onClick={handleDeleteTweet}><span style={{color: "red"}}>Удалить</span></MenuItem>
+                                    <MenuItem>{bookmarked ? <span onClick={handleDeleteBookmark}>Убрать из закладок</span>
+                                        : <span onClick={handleAddBookmark}>Добавить в закладки</span>}</MenuItem>
                                 </Menu>
                             </div>
                         </div>

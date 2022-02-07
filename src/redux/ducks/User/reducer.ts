@@ -33,6 +33,18 @@ export const userReducer = produce((draft: Draft<UserState>, action: UserActions
             }
             break;
         }
+        case UserActionTypes.ADD_USER_BOOKMARK: {
+            if (draft.data && draft.data.bookmarks) {
+                draft.data.bookmarks.push(action.payload)
+            }
+            break;
+        }
+        case UserActionTypes.DELETE_BOOKMARK: {
+            if (draft.data && draft.data.bookmarks) {
+                draft.data.bookmarks = draft.data.bookmarks.filter(item => item._id !== action.payload);
+            }
+            break;
+        }
         case UserActionTypes.FETCH_BOOKMARKS:
             break;
         case UserActionTypes.FETCH_USER:
